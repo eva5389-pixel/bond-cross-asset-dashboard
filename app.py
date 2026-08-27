@@ -7,6 +7,7 @@ import warnings
 import json
 from pathlib import Path
 import subprocess
+import os
 
 warnings.filterwarnings('ignore')
 
@@ -36,7 +37,12 @@ if 'custom_funds' not in st.session_state:
 if 'cached_asset_details' not in st.session_state: st.session_state.cached_asset_details = {}
 
 FUND_SAMPLE_SITE = "https://d47x6npujduusep99gqp2a.streamlit.app/"
-FUND_SAMPLE_ROOT = Path("/Users/evalin5310/Desktop/grafana-dashboard-main")
+FUND_SAMPLE_ROOT = Path(
+    os.environ.get(
+        "FUND_SAMPLE_ROOT",
+        str(Path.home() / "Desktop" / "grafana-dashboard-main"),
+    )
+)
 
 
 def load_fund_screener_samples():
